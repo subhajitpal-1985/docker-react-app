@@ -3,8 +3,20 @@ services:
     - docker
 
 before_install:
-    - docker build -t subhajit1985/docker-react-aws -f Dockerfile.dev .
+    - docker build -t subhajit1985/docker-react-aws .
 
-script:
-    - docker run -e CI=true subhajit1985/docker-react-aws npm run test -- --coverage    
+# script:
+#     - docker run -e CI=true subhajit1985/docker-react-aws npm run test -- --coverage    
+
+deploy: 
+    provider : elasticbeanstalk
+    region: "eu-central-1"
+    app: "docker-react-aws"
+    env: "DockerReactAws-env"
+    bucket_name: "elasticbeanstalk-eu-central-1-924742390700"
+    bucket_path: "docker-react-aws"
+    on: 
+       branch: master 
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
 
