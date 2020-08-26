@@ -1,8 +1,7 @@
+language: generic
 sudo: required
 services: 
-    - docker
-
-language: node_js    
+    - docker    
 
 before_install:
     - docker build -t subhajit1985/docker-react-aws .
